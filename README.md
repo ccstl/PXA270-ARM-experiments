@@ -335,11 +335,11 @@ module_exit(cleanup _SERIAL_LED_ctl);
 Makefile文件与实验十四相同，只需作相应修改即可，不再赘述。
 
 具体操作过程如下：
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic15.png?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic15-2.png?raw=true)
  
 编译驱动程序
 
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic16.png?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic15.png?raw=true)
  
 运行测试程序成功
 作业题代码：
