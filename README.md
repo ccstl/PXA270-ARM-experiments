@@ -13,7 +13,7 @@ ARM嵌入式实验
 + 学会简单Linux驱动程序的设计。
 
 # 二、	试验箱 
-
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic1.jpg?raw=true)
 # 三、	实验内容
 
 ## （一）	基本实验
