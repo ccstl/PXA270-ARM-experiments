@@ -335,10 +335,11 @@ module_exit(cleanup _SERIAL_LED_ctl);
 Makefile文件与实验十四相同，只需作相应修改即可，不再赘述。
 
 具体操作过程如下：
-
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic15.png?raw=true)
  
 编译驱动程序
 
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic16.png?raw=true)
  
 运行测试程序成功
 作业题代码：
@@ -430,9 +431,11 @@ devfs_unregister_chrdev (SIMPLE_LED_MAJOR, "led_ctl" );
 ```
 
 Makefile程序仍然可以用前一个实验的，只要把相关函数名改了就可以，此处不再赘述。
- 
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic17.png?raw=true) 
 编辑驱动程序过程截图
- 
+
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic18.png?raw=true)
+
 运行成功
 
 
@@ -457,8 +460,11 @@ r = r<<1;
 ```
 
 通过for循环嵌套，列向量左移8次后行向量才移1位，实现了点阵横向逐行扫描。
+
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic19.png?raw=true)
+ 横向扫描
  
- 横向扫描作业题代码：
+ 作业题代码：
 + 1、	作业题要求实现按横的方向隔行顺序扫描LED点阵数码管，修改上段代码如下;
 
 ```c
