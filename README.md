@@ -27,7 +27,7 @@ ARM嵌入式实验
 #### 实验三：是宿主PC端开发环境的安装与配置。
 
 #### 实验四：是配置宿主PC机端的超级终端，使PC机与PXA270目标板之间可以通过串口通讯。
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic2.jpg?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic2.png?raw=true)
  
 #### 实验五：是配置宿主PC机的TFTP服务。TFTP是简单文件传输协议。每次重启宿主PC机时，都要重启该服务，重启命令为：
 
@@ -42,7 +42,7 @@ ARM嵌入式实验
 ④ tftp>get zImage
 ⑤ tftp>q
 ```
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic3.jpg?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic3.png?raw=true)
 #### 实验六:是配置宿主PC机端NFS服务。
 
 NFS是指网络文件系统，它实现了文件在不同的系统间使用。当使用者想用远端档案时，只需调用“mount”就可以远端系统挂接在自己的档案系统之下。每次重启宿主PC机时，也都要重启该服务，重启命令为:
@@ -61,26 +61,29 @@ service nfs restart
 c，然后GCC编辑器编译测试程序生成测试文件。成功生成测试文件后用超级终端开始挂载，加载驱动程序，使用命令./test测试，观察测试结果，实验完成。
 
 操作过程如下图所示。
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic4.jpg?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic4.png?raw=true)
 驱动程序编辑示意图
 
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic5.jpg?raw=true) 
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic5.png?raw=true) 
 编辑makefile文件
 
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic6.jpg?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic6.png?raw=true)
 编译驱动程序成功，如图，系统提示无误。
 
 
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic7.jpg?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic7.png?raw=true)
 编译驱动程序
 
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic8.jpg?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic8.png?raw=true)
 将宿主机的根目录挂载到目标板的mnt目录下
-![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic9.jpg?raw=true)
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic9.png?raw=true)
 运行成功示意图
+
 实验总结：
-		通过本实验，我们编写的测试程序能够正常地对驱动程序进行操作，就表示驱动程序能正常工作，当然真正的驱动程序会对应特定的硬件，测试程序就相应地复杂多了。在以后的实验中，我们会开始编写真正对应实际硬件的驱动程序。
-		然而，本次试验无论实在软件思想上还是操作方法上都极具代表意义。顺利经过这一关，后面更复杂的试验就不再那么可怕。
+
+通过本实验，我们编写的测试程序能够正常地对驱动程序进行操作，就表示驱动程序能正常工作，当然真正的驱动程序会对应特定的硬件，测试程序就相应地复杂多了。在以后的实验中，我们会开始编写真正对应实际硬件的驱动程序。
+
+然而，本次试验无论实在软件思想上还是操作方法上都极具代表意义。顺利经过这一关，后面更复杂的试验就不再那么可怕。
 
 
 
