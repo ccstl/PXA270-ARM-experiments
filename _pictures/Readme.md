@@ -622,33 +622,49 @@ printk("***************************************");
 ```
 
 补充代码③：
+```c
 #ifdef OURS_DA_DEBUG
 		printk("SIMPLE_DA_read[--kernel--]\n");
 #endif
 return count;
+```
+
 补充代码④：
+```c
 #ifdef OURS_DA_DEBUG
 		printk("SIMPLE_DA_write[--kernel--]\n");
 #endif
 return count;
+```
+
 补充代码⑤：
+```c
 #ifdef OURS_DA_DEBUG
 		printk("SIMPLE_DA_ioctl[--kernel--]\n");
 #endif
 return 0;
+```
+
 补充代码⑥：
+```c
 #ifdef OURS_DA_DEBUG
 		printk("SIMPLE_DA_open[--kernel--]\n");
 #endif
 MOD_INC_USE_COUNT;
 return 0;
+```
+
 补充代码⑦：
+```c
 open:	SIMPLE_DA_open,
 read:	SIMPLE_DA_read,
 write:	SIMPLE_DA_write,
 ioctl:	SIMPLE_DA_ioctl,
 release:	SIMPLE_DA_release,
+```
+
 补充代码⑧：
+```c
 int ret = -ENODEV;
 ret = devfs_register_chrdev(SIMPLE_DA_MAJOR,  "da_serial_ctl",& DA_ops);
 showversion();
@@ -660,8 +676,11 @@ else
 {
 	   printk("pxa270 DA_driver register success!!![--kernel--]\n");
 }
+```
+
 
 补充代码（9）：
+```c
 int ret = -ENODEV;
 #ifdef OURS_DA_DEBUG
 	printk("pxa270_ DA_CTL_init[--kernel--]\n");
@@ -670,17 +689,25 @@ ret = HW_ DA_CTL_init();
 if (ret)
 	return ret;
 return 0;
+```
+
 补充代码⑩：
+```c
 #ifdef OURS_DA_DEBUG
 		printk("cleanup_DA_ctl[--kernel--]\n");
 #endif
 devfs_unregister_chrdev (SIMPLE_DA_MAJOR, "da_ctl" );
+```
+
 补充代码⑾：
+```c
 MODULE_DESCRIPTION("simple da driver module")；
 MODULE_AUTHOR("phy");
 MODULE_LICENSE("GPL");
 module_init(pxa270_DA_init);
 module_exit(cleanup _DA_ctl);	
+```
+
 Makefile文件可以继续用前面程序Mekefile的代码，只需要将相应部分的代码修改即可，在此不再赘述。
 作业题代码：
 作业题要求我们编写一个输出三角波的程序，由于原测试程序中已有产生正弦波和方波的代码，此处我们只要将原测试程序中产生正弦波的代码改成产生三角波的代码即可。
