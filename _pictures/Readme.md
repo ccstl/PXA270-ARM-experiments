@@ -248,24 +248,35 @@ return 0;
 ```
 
 补充代码⑤：
+```c
 #ifdef OURS_ SERIAL_LED _DEBUG
 		printk(" SERIAL_LED _open[--kernel--]\n");
 #endif
 MOD_INC_USE_COUNT;
 return 0;
+```
+
 补充代码⑥：
+```c
 #ifdef OURS_ SERIAL_LED _DEBUG
 		printk("SERIAL_LED _release[--kernel--]\n");
 #endif
 MOD_DEC_INC_USE_COUNT;
 return 0;
+```
+
 补充代码⑦：
+
+```c
 open:	SERIAL_LED _open,
 read:	 SERIAL_LED _read,
 write:	SERIAL_LED _write,
 ioctl:	SERIAL_LED _ioctl,
 release:	SERIAL_LED _release,
+```
+
 补充代码⑧：
+```c
 int ret = -ENODEV;
 		ret = devfs_register_chrdev(SERIAL_LED_MAJOR,  "serial_led_ctl",& SERIAL_LED _ops);
 		showversion();
@@ -278,7 +289,10 @@ int ret = -ENODEV;
 			printk("pxa270 serial_led_driver register success!!![--kernel--]\n");
 		}
 return ret;
+```
+
 补充代码⑨：
+```c
 int ret = -ENODEV;
 		#ifdef OURS_SERILA_LED_DEBUG
 			printk("pxa270_ SERIAL_LED_init[--kernel--]\n");
@@ -287,18 +301,27 @@ int ret = -ENODEV;
     	if (ret)
 return ret;
 return 0;
+```
+
 补充代码⑩：
+```c
 #ifdef OURS_SERIAL_LED_DEBUG
 		printk("cleanup_SERIAL_LED_ctl[--kernel--]\n");
 #endif
 devfs_unregister_chrdev (SERIAL_LED_MAJOR, "serial_led_ctl" );
+```
+
 补充代码⑾：
+```c
 MODULE_DESCRIPTION("simple serial led driver module");
 MODULE_AUTHOR("liduo");
 MODULE_LICENSE("GPL");
 module_init(pxa270_SERIAL_LED_init);
 module_exit(cleanup _SERIAL_LED_ctl);
+```
+
 Makefile文件与实验十四相同，只需作相应修改即可，不再赘述。
+
 具体操作过程如下：
 
  
@@ -307,20 +330,27 @@ Makefile文件与实验十四相同，只需作相应修改即可，不再赘述
  
 运行测试程序成功
 作业题代码：
-1、	实现目标板上LED数码管循环显示数字9-0。
+
++ 1、	实现目标板上LED数码管循环显示数字9-0。
 将原测试程序相关代码修改如下：
+```c
 while(1)
 { 	for(count=9;count>=0;count--)			               // 倒序显示数字
 { 	data[0] = buf[count]; ret=write(fd,data,1); sleep(1);
 }
 }
-2、	实现目标板上LED数码管循环显示数字2、4、6、8、0或8、6、4、2、0。
+```
+
++ 2、	实现目标板上LED数码管循环显示数字2、4、6、8、0或8、6、4、2、0。
 将原测试程序相关代码修改如下：
+```c
 while(1)
 { 	for(count=0;count<9;count=count+2)		              // 只循环显示偶数
 { 	data[0] = buf[count]; ret=write(fd,data,1); sleep(1);
 }
 }
+```
+
 注意：操作方法同上，LED显示符合要求，已由黄老师验收过，故此处仅陈列修改的测试程序代码部分。
 
 
@@ -335,29 +365,41 @@ while(1)
 
 #### 实验十六、LED点阵驱动程序设计
 实验目的：学会编写驱动程序，实现在Linux系统下控制LED点阵显示，并在此基础上稍加改进，实现对LED的控制。
+
 实验内容：编写一个针对硬件LED点阵的驱动程序。
+
 驱动程序代码：
+
 补充代码①：
+```c
 printk("***************************************");
 printk("\t %s \t\n",VERSION);
 printk("***************************************");
+```
 补充代码②：
+```c
 #ifdef OURS_LED_DEBUG
 		printk("SIMPLE_LED_read[--kernel--]\n");
 #endif
 return count;
+```
 补充代码③：
+```c
 #ifdef OURS_LED_DEBUG
 		printk("SIMPLE_LED_ioctl[--kernel--]\n");
 #endif
 return 0;
+```
 补充代码④：
+```c
 open:	SIMPLE_LED_open,
 read:	SIMPLE_LED_read,
 write:	SIMPLE_LED_write,
 ioctl:	SIMPLE_LED_ioctl,
 release:	SIMPLE_LED_release,
+```
 补充代码⑤：
+```c
 int ret = -ENODEV;
 		#ifdef OURS_LED_DEBUG
 			printk("pxa270_LED_init[--kernel--]\n");
@@ -366,11 +408,15 @@ ret = HW_ LED_init();
 if (ret)
 	return ret;
 return 0;
+```
 补充代码⑥：
+```c
 #ifdef OURS_LED_DEBUG
 		printk("cleanup_LED_ctl[--kernel--]\n");
 #endif
 devfs_unregister_chrdev (SIMPLE_LED_MAJOR, "led_ctl" );
+```
+
 Makefile程序仍然可以用前一个实验的，只要把相关函数名改了就可以，此处不再赘述。
  
 编辑驱动程序过程截图
@@ -378,8 +424,10 @@ Makefile程序仍然可以用前一个实验的，只要把相关函数名改了
 运行成功
 
 
-作业题代码：
++ 作业题代码：
+
 原测试程序中有如下代码：
+```c
 for (i=1;i<=8;i++)
 { 	buf[0]=c;
  buf[1]=~r; 		// row
@@ -394,11 +442,14 @@ buf[0]=c; 			// column
 c = 1;
 r = r<<1;
 }
+```
+
 通过for循环嵌套，列向量左移8次后行向量才移1位，实现了点阵横向逐行扫描。
  
-横向扫描
-作业题代码：
-1、	作业题要求实现按横的方向隔行顺序扫描LED点阵数码管，修改上段代码如下;
+ 横向扫描作业题代码：
++ 1、	作业题要求实现按横的方向隔行顺序扫描LED点阵数码管，修改上段代码如下;
+
+```c
 for (i=1;i<=4;i++)				// 修改外层循环次数为4
 { 	buf[0]=c; buf[1]=~r;
 for (j=1;j<=8;j++) 
@@ -411,7 +462,10 @@ buf[0]=c;
 c = 1;
 r = r<<2;					// 行向量每次移2位,实现隔行扫描
 }
-2、	作业题要求实现按竖的方向顺序扫描LED点阵数码管，修改原测试程序代码如下：
+```
+
++ 2、	作业题要求实现按竖的方向顺序扫描LED点阵数码管，修改原测试程序代码如下：
+```c
 for (i=1;i<=8;i++)                          //外层循环次数不变仍为8
 { 	buf[0]=c; buf[1]=~r;
 for (j=1;j<=8;j++) 
@@ -424,7 +478,7 @@ buf[1]=~r;
 r = 1;
 c = c<<1;					   // 修改外循环为对列向量移位
 }
-
+```
 
 
 
@@ -438,43 +492,65 @@ c = c<<1;					   // 修改外循环为对列向量移位
 
 #### 实验十七：AD驱动实验
 实验目的：编写驱动程序对模拟量输入进行采集，并转换为数字量显示在超级终端上，从而实现AD转换。
+
 实验内容：
-1、	编程对模拟量输入进行采集和转换，并将结果显示在超级终端上。
-2、	通过改变模拟量输入，观察显示结果。
+
++ 1、	编程对模拟量输入进行采集和转换，并将结果显示在超级终端上。
++ 2、	通过改变模拟量输入，观察显示结果。
+
 驱动程序代码：
+
 补充代码①：
+```c
 printk("***************************************");
 printk("\t %s \t\n",VERSION);
 printk("***************************************");
+```
 补充代码②：
+```c
 #ifdef OURS_ADCTL_DEBUG
 		printk("SIMPLE_ADCTL_read[--kernel--]\n");
 #endif
 return count;
+```
+
 补充代码③：
+```c
 #ifdef OURS_ADCTL_DEBUG
 		printk("SIMPLE_ADCTL_write[--kernel--]\n");
 #endif
 return count;
+```
+
 补充代码④：
+```c
 #ifdef OURS_ADCTL_DEBUG
 		printk("SIMPLE_ADCTL_open[--kernel--]\n");
 #endif
 MOD_INC_USE_COUNT;
 return 0;
+```
+
 补充代码⑤：
+```c
 #ifdef OURS_ADCTL_DEBUG
 		printk("SIMPLE_ADCTL_release[--kernel--]\n");
 #endif
 MOD_DEC_INC_USE_COUNT;
 return 0;
+```
+
 补充代码⑥：
+```c
 open:	SIMPLE_ADCTL_open,
 read:	SIMPLE_ADCTL_read,
 write:	SIMPLE_ADCTL_write,
 ioctl:	SIMPLE_ADCTL_ioctl,
 release:	SIMPLE_ADCTL_release,
+```
+
 补充代码⑦：
+```c
 int ret = -ENODEV;
 ret = devfs_register_chrdev(SIMPLE_ADCTL_MAJOR,  "adctl_serial_ctl",& ADCTL_ops);
 showversion();
@@ -487,7 +563,10 @@ else
 			printk("pxa270 adctl_driver register success!!![--kernel--]\n");
 		}
 return ret;
+```
+
 补充代码⑧：
+```c
 int ret = -ENODEV;
 #ifdef OURS_ADCTL_DEBUG
 		printk("pxa270_ ADCTL_init[--kernel--]\n");
@@ -496,19 +575,27 @@ ret = HW_ ADCTL_init();
 if (ret)
   		return ret;
 return 0;
+```
+
 补充代码⑨：
+```c
 #ifdef OURS_ADCTL_DEBUG
 		printk("cleanup_ADCTL_ctl[--kernel--]\n");
 #endif
 devfs_unregister_chrdev (SIMPLE_ADCTL_MAJOR, "adctl_ctl" );
+```
+
 Makefile文件可以用前一个程序的文件，只要将相应部分的代码修改即可，此处不再赘述。
 作业题代码：
+```c
 for(i=0;i<50;i++)
 {	Val0 = ioctl(fd,UCB_ADC_INP_AD1,0);
 usleep(100);
 Val1 = ioctl(fd,UCB_ADC_INP_AD0,0); 
 usleep(500000);
 }
+```
+
 作业题要求将UCB_ADC_INP_AD0换成其他通道，但由于AD通道只有AD0和AD1，故只是将原测试程序代码中的AD0与AD1对换。
 
 #### 实验十八：DA驱动实验
@@ -516,6 +603,7 @@ usleep(500000);
 实验内容：编写驱动程序，实现将数字信号转换成模拟信号并在示波器上显示出模拟信号波形，即实现DA转换。
 驱动程序代码：
 补充代码①——头文件
+```c
 #include <linux/config.h>
 #include <linux/kernel.h>
 #include <linux/sched.h>
@@ -524,10 +612,15 @@ usleep(500000);
 #include <linux/module.h>
 #include <asm/hardware.h>
 #include<asm/io.h>
+```
+
 补充代码②：
+```c
 printk("***************************************");
 printk("\t %s \t\n",VERSION);
 printk("***************************************");
+```
+
 补充代码③：
 #ifdef OURS_DA_DEBUG
 		printk("SIMPLE_DA_read[--kernel--]\n");
@@ -620,7 +713,6 @@ x=((j/POINT)*(5*M_PI));
 最让我难忘的是第12节实验课。不知是那儿不对，那个代码我输入了三遍，浪费了很长时间，以至于落后别人一大截。还好最后越过了这个坎。后来就再也没有遇到这种情况，所以后面几个实验做得很顺利，最终我还是赶上了大部队。
 
 很多同学对我们的实验课认识不足，心里不重视，觉得这种课很水，就是一点儿不做也能得到不错的分数；语气在实验室埋头苦干，倒不如努力学习微机原理等难学然而学分很高的课程。我觉得这就有点儿本末倒置了。学校每年对实验课的投入很大，包括实验器材的购买，教师的培训等，往往一掷千金。从这一点可以看出学校、社会对实验课有多么重视，实验课有多么重要。我们学习的最终目的，不是看你考了多少多少分，而是看你能做多少事，看你动手能力有多强。很多学生考试成绩很好，但是动起手来则表现一塌糊涂，实在是不应该。所以我觉得实验课应当切实重视起来，只有这样我们才能均衡发展，成长为对社会有用的人才。
-
 
 
 
