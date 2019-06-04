@@ -139,11 +139,13 @@ pxa270_gpio_led_drv.o:pxa270_gpio_led_drv.c
 编译运行和实验十二相同，不再赘述。
 
 运行验证过程如下图所示：
- 
-驱动成序编辑过程剪影
- 
-编译测试程序
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic10.png?raw=true)
 
+驱动成序编辑过程剪影
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic11.png?raw=true)
+
+编译测试程序
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic12.png?raw=true)
  
 运行成功，在试验箱上可以看到绿色LED灯闪烁。
 作业题代码:
@@ -212,10 +214,13 @@ Makefile文件如实验十三做相应修改，不再赘述。
 
 本实验不需要测试程序。因为中断是一个异步的外部事件，要求每到中断发生的时候，系统都需要响应，所以不需要测试程序，系统也会自动响应中断的。
 驱动程序编译成功后，直接用超级终端挂载，按目标版键盘上方的SW2键就会触发中断。
+
 实验过程截图如下：
- 
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic13.png?raw=true)
+
 编译驱动程序无误、
- 
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic14.png?raw=true)
+
 运行成功，中断能够很好地响应。
 
 #### 实验十五、数码管显示驱动实验
