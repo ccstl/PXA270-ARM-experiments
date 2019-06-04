@@ -731,6 +731,7 @@ Makefile文件可以继续用前面程序Mekefile的代码，只需要将相应�
 作业题代码：
 作业题要求我们编写一个输出三角波的程序，由于原测试程序中已有产生正弦波和方波的代码，此处我们只要将原测试程序中产生正弦波的代码改成产生三角波的代码即可。
 
+![pic](https://github.com/wolfbrother/PXA270-ARM-experiments/blob/master/_pictures/pic19.png?raw=true)
 三角波抓拍
 
 原正弦波代码：
